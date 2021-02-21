@@ -2,6 +2,7 @@
 
 namespace Astronomical
 {
+
     /// <summary>
     /// Creates a large scale zone centered on a Black Hole.
     /// </summary>
@@ -12,17 +13,17 @@ namespace Astronomical
         private int starCount;
 
         [SerializeField]
-        private int m_maxDistanceInLightYears = 200;
+        private int m_maxDistanceInLightYears = 52000;
         [SerializeField]
         private int m_minDistanceInLightYears = 1;
 
-        internal override UniverseZone GenerateZone(UniverseZone parent)
+        internal override UniversePositionAnchor GenerateZone(UniversePositionAnchor parent)
         {
-            UniverseZone galacticZone = new UniverseZone(parent, 0, Vector3.zero, 1, UniverseZone.ZoneRepresentation.BLACKHOLE, UniverseZone.ScaleUnit.LIGHTYEAR); ;
+            UniversePositionAnchor galacticZone = new UniversePositionAnchor(parent, 0, Vector3.zero, UniversePositionAnchor.ZoneRepresentation.BLACKHOLE, UniversePositionAnchor.ScaleUnit.LIGHTYEAR);
 
             if (starCount <= 0) return galacticZone;
 
-            UniverseZone[] starSystemZones = new UniverseZone[starCount];
+            UniversePositionAnchor[] starSystemZones = new UniversePositionAnchor[starCount];
 
             for(int starSystemID = 0; starSystemID < starCount; starSystemID++)
             {
@@ -37,13 +38,13 @@ namespace Astronomical
                 direction.Normalize();
                 uint distance = (uint)Random.Range(m_minDistanceInLightYears, m_maxDistanceInLightYears);
 
-                UniverseZone starSystemZone = new UniverseZone(galacticZone, distance, direction, 1, UniverseZone.ZoneRepresentation.STAR, UniverseZone.ScaleUnit.KILOMETERS);
+                UniversePositionAnchor starSystemZone = new UniversePositionAnchor(galacticZone, distance, direction, UniversePositionAnchor.ZoneRepresentation.STAR, UniversePositionAnchor.ScaleUnit.AU);
                 starSystemZones[starSystemID] = starSystemZone;
 
                 Debug.Log("Generated star system in direction " + direction + " at distance " + starSystemZone.distanceFromParent + " LY.");
             }
 
-            galacticZone.childZonesList.AddRange(starSystemZones);
+            galacticZone.childAnchorsList.AddRange(starSystemZones);
             return galacticZone;
         }
     }

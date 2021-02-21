@@ -9,6 +9,6 @@ namespace Astronomical
     [CreateAssetMenu(fileName = "New Zone Generator", menuName = "Astronomical/Zone Generator/Zone Generator", order = 0)]
     public abstract class ZoneGenerator : ScriptableObject
     {
-        abstract internal UniverseZone GenerateZone(UniverseZone parent = null);
+        abstract internal UniversePositionAnchor GenerateZone(UniversePositionAnchor parent = null);
     }
 }

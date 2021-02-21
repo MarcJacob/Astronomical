@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c9039bc34285543a38a839fb4ae36c, type: 3}
   m_Name: Basic Galaxy Generator
   m_EditorClassIdentifier: 
-  starCount: 50
-  m_maxDistanceInLightYears: 200
+  starCount: 200
+  m_maxDistanceInLightYears: 52000
   m_minDistanceInLightYears: 1

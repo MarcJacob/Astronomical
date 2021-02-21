@@ -12,17 +12,18 @@ namespace Astronomical
         [SerializeField]
         private ZoneGenerator m_rootZoneGenerator;
 
-        private UniverseZone m_rootZone;
-
         private void Start()
         {
-            m_rootZone = m_rootZoneGenerator.GenerateZone();
+            var rootZone = m_rootZoneGenerator.GenerateZone();
+
+            Universe.Build(rootZone);
             ActivateUniverseManagers();
         }
 
         private void ActivateUniverseManagers()
         {
-            GetComponent<UniverseRenderManager>().StartRender(m_rootZone);
+            GetComponent<UniverseRenderManager>().StartRender();
+            GetComponent<PlayerUniversalPositionManager>().UpdatePlayerUniversalPosition();
         }
     }
 }
